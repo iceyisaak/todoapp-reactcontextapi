@@ -6,15 +6,20 @@ const TodoContextProvider = ({ children }) => {
 
   const [task, setTask] = useState('');
 
+
+  const addTask = (taskEntry) => {
+
+  };
+
   return (
     <TodoContext.Provider
-      value={{
+      value={[
         task,
         setTask
-      }}
+      ]}
     >
       {children}
-    </TodoContext.Provider>
+    </TodoContext.Provider >
   );
 
 };
