@@ -1,14 +1,10 @@
-import { useContext } from 'react';
-import { TodoContext } from '../../../contexts/TodoContext';
+// import { useTodoContext } from '../../../contexts/TodoContext';
 
-const TaskItem = () => {
-
-  const { task } = useContext(TodoContext);
-
+const TaskItem = (task) => {
 
   return (
     <li>
-      {task}
+      {task.taskEntry}
     </li>
   );
 };

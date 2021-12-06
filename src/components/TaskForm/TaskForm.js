@@ -1,17 +1,16 @@
-import { useState, useContext } from 'react';
-import { TodoContext } from '../../contexts/TodoContext';
+import { useState } from 'react';
+import { useTodoContext } from '../../contexts/TodoContext';
 
 const TaskForm = () => {
 
   const {
     addTask,
-  } = useContext(TodoContext);
+  } = useTodoContext();
 
   const [taskEntry, setTaskEntry] = useState('');
 
   const onSubmitHandler = (e) => {
     e.preventDefault();
-    // console.log(task);
     addTask(taskEntry);
     setTaskEntry('');
   };
