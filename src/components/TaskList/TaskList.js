@@ -13,7 +13,6 @@ const TaskList = () => {
         {tasks.map((task) => (
           <TaskItem key={task.id} task={task} />
         ))}
-
       </ul>
     </div>
   );

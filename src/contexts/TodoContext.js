@@ -16,7 +16,6 @@ const TodoContextProvider = ({ children }) => {
 
 
   const addTask = (taskEntry) => {
-
     setTasks([
       ...tasks,
       {
@@ -24,11 +23,19 @@ const TodoContextProvider = ({ children }) => {
         id: uuidv4()
       }
     ]);
-
   };
 
   const deleteTask = (id) => {
     console.log('deleteTask()', id);
+    setTasks(
+      tasks.filter((task) => {
+        return task.id !== id;
+      })
+    );
+  };
+
+  const clearTaskList = () => {
+    setTasks([]);
   };
 
   const editTask = (taskEntry, id) => {
@@ -41,7 +48,8 @@ const TodoContextProvider = ({ children }) => {
         addTask,
         tasks,
         deleteTask,
-        editTask
+        editTask,
+        clearTaskList
       }}
     >
       {children}
