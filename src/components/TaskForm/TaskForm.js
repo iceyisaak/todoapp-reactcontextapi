@@ -7,16 +7,16 @@ const TaskForm = () => {
     addTask,
   } = useTodoContext();
 
-  const [taskEntry, setTaskEntry] = useState('');
+  const [taskEntry, setTaskEntry] = useState("");
+
+  const onChangeHandler = (e) => {
+    setTaskEntry(e.target.value);
+  };
 
   const onSubmitHandler = (e) => {
     e.preventDefault();
     addTask(taskEntry);
     setTaskEntry('');
-  };
-
-  const onChangeHandler = (e) => {
-    setTaskEntry(e.target.value);
   };
 
   return (

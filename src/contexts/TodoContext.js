@@ -6,13 +6,14 @@ const TodoContext = createContext();
 
 const TodoContextProvider = ({ children }) => {
 
-  const [tasks, setTasks] = useState([
-    { taskEntry: 'Painting', id: 1 },
-    { taskEntry: 'Jogging', id: 2 },
-  ]);
+  const [tasks, setTasks] = useState([]);
 
   const addTask = (taskEntry) => {
+
+    // console.log() works
     console.log(taskEntry);
+
+    // setTasks() Not adding new items
     setTasks([
       ...tasks,
       {
@@ -20,8 +21,8 @@ const TodoContextProvider = ({ children }) => {
         id: uuidv4()
       }
     ]);
-    console.log(tasks);
   };
+  console.log(tasks);
 
   return (
     <TodoContext.Provider

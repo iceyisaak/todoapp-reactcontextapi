@@ -1,6 +1,6 @@
 // import { useTodoContext } from '../../../contexts/TodoContext';
 
-const TaskItem = (task) => {
+const TaskItem = ({ task }) => {
 
   return (
     <li>
