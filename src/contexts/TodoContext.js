@@ -1,4 +1,4 @@
-import { useState, useContext, createContext } from 'react';
+import { useState, useContext, useEffect, createContext } from 'react';
 import { v4 as uuidv4 } from 'uuid';
 
 
@@ -6,14 +6,17 @@ const TodoContext = createContext();
 
 const TodoContextProvider = ({ children }) => {
 
-  const [tasks, setTasks] = useState([]);
+  const initialState = JSON.parse(localStorage.getItem('tasks')) || [];
+
+  const [tasks, setTasks] = useState(initialState);
+
+  useEffect(() => {
+    localStorage.setItem('tasks', JSON.stringify(tasks));
+  }, [tasks]);
+
 
   const addTask = (taskEntry) => {
 
-    // console.log() works
-    console.log(taskEntry);
-
-    // setTasks() Not adding new items
     setTasks([
       ...tasks,
       {
@@ -21,14 +24,24 @@ const TodoContextProvider = ({ children }) => {
         id: uuidv4()
       }
     ]);
+
   };
-  console.log(tasks);
+
+  const deleteTask = (id) => {
+    console.log('deleteTask()', id);
+  };
+
+  const editTask = (taskEntry, id) => {
+    console.log('editTask()', taskEntry, id);
+  };
 
   return (
     <TodoContext.Provider
       value={{
         addTask,
-        tasks
+        tasks,
+        deleteTask,
+        editTask
       }}
     >
       {children}

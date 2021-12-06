@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { MdOutlineAddCircleOutline } from 'react-icons/md';
 import { useTodoContext } from '../../contexts/TodoContext';
 
 const TaskForm = () => {
@@ -29,7 +30,7 @@ const TaskForm = () => {
         required
       />
       <button>
-        Add
+        <MdOutlineAddCircleOutline />
       </button>
     </form>
   );
