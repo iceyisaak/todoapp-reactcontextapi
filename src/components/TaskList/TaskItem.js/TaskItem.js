@@ -15,7 +15,7 @@ const TaskItem = ({ task }) => {
 
   return (
     <li>
-      <input type="checkbox" /> {task.taskEntry} <MdOutlineEdit onClick={onFindItem} /> <MdOutlineDelete onClick={onDeleteTask} />
+      {task.taskEntry} <MdOutlineEdit onClick={onFindItem} /> <MdOutlineDelete onClick={onDeleteTask} />
     </li>
   );
 };

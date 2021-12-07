@@ -6,7 +6,7 @@ import TaskList from '../TaskList/TaskList';
 
 const Home = () => {
 
-  const { clearTaskList } = useTodoContext();
+  const { deleteAllTasks } = useTodoContext();
 
   return (
     <>
@@ -16,8 +16,8 @@ const Home = () => {
       <div>
         <TaskList />
       </div>
-      <button onClick={clearTaskList}>
-        Clear Task List
+      <button onClick={deleteAllTasks}>
+        Delete All Tasks
       </button>
     </>
   );

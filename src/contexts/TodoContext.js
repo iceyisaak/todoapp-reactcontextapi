@@ -39,6 +39,10 @@ const TodoContextProvider = ({ children }) => {
     }
   };
 
+  const deleteAllTasks = () => {
+    setTasks([]);
+  };
+
   const findItem = (id) => {
     console.log('findItem()');
     const item = tasks.find((task) => {
@@ -47,9 +51,6 @@ const TodoContextProvider = ({ children }) => {
     setEditItem(item);
   };
 
-  const clearTaskList = () => {
-    setTasks([]);
-  };
 
   const editTask = (taskEntry, id) => {
     console.log('editTask()', taskEntry, id);
@@ -70,7 +71,7 @@ const TodoContextProvider = ({ children }) => {
         tasks,
         deleteTask,
         editTask,
-        clearTaskList,
+        deleteAllTasks,
         findItem,
         editItem
       }}
