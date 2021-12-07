@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Jost:wght@500&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Overpass:wght@700&family=Yrsa&display=swap');
 
 * {
   box-sizing: border-box;
@@ -8,12 +8,16 @@
 
 html,
 body {
+  font-family: 'Yrsa', serif;
   font-size: calc(0.625 * 16px);
-  font-family: 'Jost', sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  background: #122834;
-  color: #1b92d6;
+}
+
+h1,
+h2,
+h3 {
+  font-family: 'Overpass', sans-serif;
 }
 
 .pointer {

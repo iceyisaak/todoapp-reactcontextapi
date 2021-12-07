@@ -1,13 +1,14 @@
 import { useTodoContext } from '../../contexts/TodoContext';
 import TaskItem from "./TaskItem.js/TaskItem";
 
+import style from './TaskList.module.scss';
 
 const TaskList = () => {
 
   const { tasks } = useTodoContext();
 
   return (
-    <div>
+    <div className={`${style['TaskList']}`}>
       {tasks.length === 0 && <p>No Tasks</p>}
       <ul>
         {tasks.map((task) => (

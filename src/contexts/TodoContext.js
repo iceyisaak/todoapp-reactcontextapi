@@ -26,7 +26,7 @@ const TodoContextProvider = ({ children }) => {
   };
 
   const deleteTask = (id) => {
-    const confirm = window.confirm('Are you sure you want to delete this task?');
+    const confirm = window.confirm('Delete this task?');
     if (confirm) {
       setTasks(
         tasks.filter((task) => {
@@ -37,7 +37,12 @@ const TodoContextProvider = ({ children }) => {
   };
 
   const deleteAllTasks = () => {
-    setTasks([]);
+
+    const confirm = window.confirm('Delete All Tasks?');
+
+    if (confirm) {
+      setTasks([]);
+    }
   };
 
   const findItem = (id) => {
