@@ -9,7 +9,7 @@ const TaskList = () => {
 
   return (
     <div className={`${style['TaskList']}`}>
-      {tasks.length === 0 && <p>No Tasks</p>}
+      {tasks.length === 0 && <p className={`${style['no-task']}`}>+++ Task List is Empty +++</p>}
       <ul>
         {tasks.map((task) => (
           <TaskItem key={task.id} task={task} />
