@@ -3,19 +3,19 @@ import { MdOutlineEdit, MdOutlineDelete } from 'react-icons/md';
 
 const TaskItem = ({ task }) => {
 
-  const { deleteTask, editTask } = useTodoContext();
+  const { deleteTask, findItem } = useTodoContext();
 
   const onDeleteTask = () => {
     deleteTask(task.id);
   };
 
-  const onEditTask = () => {
-    editTask(task.id, task.taskEntry);
+  const onFindItem = () => {
+    findItem(task.id);
   };
 
   return (
     <li>
-      <input type="checkbox" /> {task.taskEntry} <MdOutlineEdit onClick={onEditTask} /> <MdOutlineDelete onClick={onDeleteTask} />
+      <input type="checkbox" /> {task.taskEntry} <MdOutlineEdit onClick={onFindItem} /> <MdOutlineDelete onClick={onDeleteTask} />
     </li>
   );
 };

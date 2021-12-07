@@ -9,6 +9,7 @@ const TodoContextProvider = ({ children }) => {
   const initialState = JSON.parse(localStorage.getItem('tasks')) || [];
 
   const [tasks, setTasks] = useState(initialState);
+  const [editItem, setEditItem] = useState(null);
 
   useEffect(() => {
     localStorage.setItem('tasks', JSON.stringify(tasks));
@@ -26,12 +27,24 @@ const TodoContextProvider = ({ children }) => {
   };
 
   const deleteTask = (id) => {
-    console.log('deleteTask()', id);
-    setTasks(
-      tasks.filter((task) => {
-        return task.id !== id;
-      })
-    );
+
+    const confirm = window.confirm('Are you sure you want to delete this task?');
+
+    if (confirm) {
+      setTasks(
+        tasks.filter((task) => {
+          return task.id !== id;
+        })
+      );
+    }
+  };
+
+  const findItem = (id) => {
+    console.log('findItem()');
+    const item = tasks.find((task) => {
+      return task.id === id;
+    });
+    setEditItem(item);
   };
 
   const clearTaskList = () => {
@@ -40,6 +53,14 @@ const TodoContextProvider = ({ children }) => {
 
   const editTask = (taskEntry, id) => {
     console.log('editTask()', taskEntry, id);
+
+    const updatedTasks = tasks.map((task) => (
+      task.id === id ? { taskEntry, id } : task
+    ));
+
+    setTasks(updatedTasks);
+    setEditItem(null);
+
   };
 
   return (
@@ -49,7 +70,9 @@ const TodoContextProvider = ({ children }) => {
         tasks,
         deleteTask,
         editTask,
-        clearTaskList
+        clearTaskList,
+        findItem,
+        editItem
       }}
     >
       {children}
