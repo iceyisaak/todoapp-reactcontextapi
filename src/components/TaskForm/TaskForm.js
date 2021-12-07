@@ -19,7 +19,7 @@ const TaskForm = () => {
   const onSubmitHandler = (e) => {
     e.preventDefault();
 
-    if (!editTask) {
+    if (!editItem) {
       addTask(taskEntry);
       setTaskEntry('');
     } else {
