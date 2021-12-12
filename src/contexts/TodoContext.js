@@ -1,33 +1,58 @@
 import { useState, useContext, useEffect, createContext } from 'react';
-import { v4 as uuidv4 } from 'uuid';
+// import { v4 as uuidv4 } from 'uuid';
+
 
 
 const TodoContext = createContext();
 
 const TodoContextProvider = ({ children }) => {
 
-  const initialState = JSON.parse(localStorage.getItem('tasks')) || [];
-  const [tasks, setTasks] = useState(initialState);
+  const [tasks, setTasks] = useState([]);
   const [editItem, setEditItem] = useState(null);
+  const [isLoading, setIsLoading] = useState(false);
 
   useEffect(() => {
-    localStorage.setItem('tasks', JSON.stringify(tasks));
-  }, [tasks]);
+    fetchTasks();
+  }, []);
 
 
-  const addTask = (taskEntry) => {
-    setTasks([
-      ...tasks,
-      {
-        taskEntry,
-        id: uuidv4()
-      }
-    ]);
+
+  const fetchTasks = async () => {
+    setIsLoading(true);
+    const response = await fetch(`/tasks`);
+    const data = await response.json();
+    setTasks(data);
+    setIsLoading(false);
   };
 
-  const deleteTask = (id) => {
+
+
+  const addTask = async (taskEntry) => {
+
+    const response = await fetch(`/tasks`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(taskEntry)
+    });
+
+    // Working fine till here
+    console.log('A', taskEntry);
+
+    // Error starts from here
+    const data = await response.json();
+
+
+    console.log('B', taskEntry);
+    // console.log(data);
+    setTasks([...tasks, data]);
+  };
+
+  const deleteTask = async (id) => {
     const confirm = window.confirm('Delete this task?');
     if (confirm) {
+      await fetch(`/tasks/`);
       setTasks(
         tasks.filter((task) => {
           return task.id !== id;
@@ -70,7 +95,8 @@ const TodoContextProvider = ({ children }) => {
         editTask,
         deleteAllTasks,
         findItem,
-        editItem
+        editItem,
+        isLoading
       }}
     >
       {children}
