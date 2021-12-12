@@ -17,7 +17,7 @@ const TaskItem = ({ task }) => {
   return (
     <li className={`${style['TaskItem']}`}>
       <span className={`${style['task-name']}`}>
-        {task.taskEntry}
+        {task.title}
       </span>
       <MdOutlineEdit onClick={onFindItem} className={`${'pointer'} ${style['item-btn']}`} />
       <MdOutlineDelete onClick={onDeleteTask} className={`${'pointer'} ${style['item-btn']}`} />

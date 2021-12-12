@@ -6,26 +6,31 @@ import style from './TaskForm.module.scss';
 
 const TaskForm = () => {
 
+  const [text, setText] = useState("");
+
   const {
     addTask,
     editTask,
     editItem
   } = useTodoContext();
 
-  const [taskEntry, setTaskEntry] = useState("");
 
   const onChangeHandler = (e) => {
-    setTaskEntry(e.target.value);
+    setText(e.target.value);
   };
 
   const onSubmitHandler = (e) => {
     e.preventDefault();
 
+    const newTask = {
+      title: text
+    };
+
     if (!editItem) {
-      addTask(taskEntry);
-      setTaskEntry('');
+      addTask(newTask);
+      setText('');
     } else {
-      editTask(taskEntry, editItem.id);
+      editTask(text, editItem.id);
     }
 
   };
@@ -33,9 +38,9 @@ const TaskForm = () => {
 
   useEffect(() => {
     if (editItem) {
-      setTaskEntry(editItem.taskEntry);
+      setText(editItem.taskEntry);
     } else {
-      setTaskEntry('');
+      setText('');
     }
   }, [editItem]);
 
@@ -46,7 +51,7 @@ const TaskForm = () => {
         type="text"
         onChange={onChangeHandler}
         placeholder='e.g. Shopping'
-        value={taskEntry}
+        value={text}
         required
         className={`${style['input']}`}
         maxLength={25}

@@ -27,25 +27,16 @@ const TodoContextProvider = ({ children }) => {
 
 
 
-  const addTask = async (taskEntry) => {
+  const addTask = async (newTask) => {
 
     const response = await fetch(`/tasks`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json'
       },
-      body: JSON.stringify(taskEntry)
+      body: JSON.stringify(newTask)
     });
-
-    // Working fine till here
-    console.log('A', taskEntry);
-
-    // Error starts from here
     const data = await response.json();
-
-
-    console.log('B', taskEntry);
-    // console.log(data);
     setTasks([...tasks, data]);
   };
 
@@ -78,9 +69,9 @@ const TodoContextProvider = ({ children }) => {
   };
 
 
-  const editTask = (taskEntry, id) => {
+  const editTask = (title, id) => {
     const updatedTasks = tasks.map((task) => (
-      task.id === id ? { taskEntry, id } : task
+      task.id === id ? { title, id } : task
     ));
     setTasks(updatedTasks);
     setEditItem(null);

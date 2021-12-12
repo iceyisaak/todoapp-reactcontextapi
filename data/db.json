@@ -1,20 +1,36 @@
 {
   "tasks": [
     {
-      "taskEntry": "Jogging",
+      "title": "Jogging",
       "id": 1
     },
     {
-      "taskEntry": "Painting",
+      "title": "Painting",
       "id": 2
     },
     {
-      "taskEntry": "Shopping",
+      "title": "Shopping",
       "id": 3
     },
     {
-      "taskEntry": "Cooking",
+      "title": "Cooking",
       "id": 4
+    },
+    {
+      "title": "Reading",
+      "id": 5
+    },
+    {
+      "title": "Testing",
+      "id": 8
+    },
+    {
+      "title": "Validating",
+      "id": 9
+    },
+    {
+      "title": "Googling",
+      "id": 10
     }
   ]
 }
