@@ -11,7 +11,8 @@ const TaskForm = () => {
   const {
     addTask,
     editTask,
-    editItem
+    // editItem,
+    taskToEdit
   } = useTodoContext();
 
 
@@ -26,23 +27,24 @@ const TaskForm = () => {
       title: text
     };
 
-    if (!editItem) {
+    if (!taskToEdit.edit) {
       addTask(newTask);
       setText('');
     } else {
-      editTask(text, editItem.id);
+      editTask(taskToEdit.task.id, newTask);
+      // console.log(text, taskToEdit.task.id);
     }
 
   };
 
 
   useEffect(() => {
-    if (editItem) {
-      setText(editItem.taskEntry);
+    if (taskToEdit.edit) {
+      setText(taskToEdit.task.title);
     } else {
       setText('');
     }
-  }, [editItem]);
+  }, [taskToEdit]);
 
 
   return (

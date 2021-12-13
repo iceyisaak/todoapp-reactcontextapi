@@ -4,14 +4,14 @@ import style from './TaskItem.module.scss';
 
 const TaskItem = ({ task }) => {
 
-  const { deleteTask, findItem } = useTodoContext();
+  const { deleteTask, selectTaskToEdit } = useTodoContext();
 
   const onDeleteTask = () => {
     deleteTask(task.id);
   };
 
-  const onFindItem = () => {
-    findItem(task.id);
+  const onSelectEditTask = () => {
+    selectTaskToEdit(task);
   };
 
   return (
@@ -19,7 +19,7 @@ const TaskItem = ({ task }) => {
       <span className={`${style['task-name']}`}>
         {task.title}
       </span>
-      <MdOutlineEdit onClick={onFindItem} className={`${'pointer'} ${style['item-btn']}`} />
+      <MdOutlineEdit onClick={onSelectEditTask} className={`${'pointer'} ${style['item-btn']}`} />
       <MdOutlineDelete onClick={onDeleteTask} className={`${'pointer'} ${style['item-btn']}`} />
     </li>
   );

@@ -1,10 +1,6 @@
 {
   "tasks": [
     {
-      "title": "Jogging",
-      "id": 1
-    },
-    {
       "title": "Painting",
       "id": 2
     },
@@ -13,7 +9,7 @@
       "id": 3
     },
     {
-      "title": "Cooking",
+      "title": "Coding",
       "id": 4
     },
     {
@@ -25,12 +21,16 @@
       "id": 8
     },
     {
-      "title": "Validating",
+      "title": "Baking",
       "id": 9
     },
     {
-      "title": "Googling",
+      "title": "Drivingly",
       "id": 10
+    },
+    {
+      "title": "Buying",
+      "id": 11
     }
   ]
 }

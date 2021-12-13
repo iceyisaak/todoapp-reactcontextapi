@@ -5,12 +5,15 @@ import style from './TaskList.module.scss';
 
 const TaskList = () => {
 
-  const { tasks } = useTodoContext();
+  const { tasks, isLoading } = useTodoContext();
 
-  return (
+  return isLoading ? (
+    <p>Loading...</p>
+  ) : (
     <div className={`${style['TaskList']}`}>
-      {tasks.length === 0 && <p className={`${style['no-task']}`}>+++ Task List is Empty +++</p>}
+      {!isLoading && tasks.length === 0 && <p className={`${style['no-task']}`}>+++ Task List is Empty +++</p>}
       <ul>
+
         {tasks.map((task) => (
           <TaskItem key={task.id} task={task} />
         ))}

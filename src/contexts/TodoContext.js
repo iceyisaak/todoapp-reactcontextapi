@@ -1,6 +1,4 @@
 import { useState, useContext, useEffect, createContext } from 'react';
-// import { v4 as uuidv4 } from 'uuid';
-
 
 
 const TodoContext = createContext();
@@ -8,8 +6,12 @@ const TodoContext = createContext();
 const TodoContextProvider = ({ children }) => {
 
   const [tasks, setTasks] = useState([]);
-  const [editItem, setEditItem] = useState(null);
+  // const [editItem, setEditItem] = useState(null);
   const [isLoading, setIsLoading] = useState(false);
+  const [taskToEdit, setTaskToEdit] = useState({
+    task: {},
+    edit: false
+  });
 
   useEffect(() => {
     fetchTasks();
@@ -28,7 +30,6 @@ const TodoContextProvider = ({ children }) => {
 
 
   const addTask = async (newTask) => {
-
     const response = await fetch(`/tasks`, {
       method: 'POST',
       headers: {
@@ -43,7 +44,9 @@ const TodoContextProvider = ({ children }) => {
   const deleteTask = async (id) => {
     const confirm = window.confirm('Delete this task?');
     if (confirm) {
-      await fetch(`/tasks/`);
+      await fetch(`/tasks/${id}`, {
+        method: 'DELETE'
+      });
       setTasks(
         tasks.filter((task) => {
           return task.id !== id;
@@ -52,29 +55,52 @@ const TodoContextProvider = ({ children }) => {
     }
   };
 
-  const deleteAllTasks = () => {
-
+  //////////////////////////////////////////////////////////////
+  const deleteAllTasks = async () => {
     const confirm = window.confirm('Delete All Tasks?');
-
     if (confirm) {
+      await fetch(`/tasks`, {
+        method: 'DELETE'
+      });
       setTasks([]);
     }
   };
+  /////////////////////////////////////////////////////////////
 
-  const findItem = (id) => {
-    const item = tasks.find((task) => {
-      return task.id === id;
+  // const findItem = (id) => {
+  //   const item = tasks.find((task) => {
+  //     return task.id === id;
+  //   });
+  //   setEditItem(item);
+  // };
+
+
+  const editTask = async (id, editedTask) => {
+    const response = await fetch(`/tasks/${id}`, {
+      method: 'PUT',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(editedTask)
     });
-    setEditItem(item);
+    const data = await response.json();
+    const updatedTasks = tasks.map(
+      (task) => (task.id === id ? { ...task, ...data } : task)
+    );
+    setTasks(updatedTasks);
+    setTaskToEdit({
+      task: {},
+      edit: false
+    });
   };
 
 
-  const editTask = (title, id) => {
-    const updatedTasks = tasks.map((task) => (
-      task.id === id ? { title, id } : task
-    ));
-    setTasks(updatedTasks);
-    setEditItem(null);
+  const selectTaskToEdit = (task) => {
+    console.log('TodoContext.js', task);
+    setTaskToEdit({
+      task,
+      edit: true
+    });
   };
 
   return (
@@ -84,9 +110,11 @@ const TodoContextProvider = ({ children }) => {
         tasks,
         deleteTask,
         editTask,
+        taskToEdit,
+        selectTaskToEdit,
         deleteAllTasks,
-        findItem,
-        editItem,
+        // findItem,
+        // editItem,
         isLoading
       }}
     >
