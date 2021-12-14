@@ -44,36 +44,30 @@ const TodoContextProvider = ({ children }) => {
   const deleteTask = async (id) => {
     const confirm = window.confirm('Delete this task?');
     if (confirm) {
-      await fetch(`/tasks/${id}`, {
-        method: 'DELETE'
-      });
-      setTasks(
-        tasks.filter((task) => {
-          return task.id !== id;
-        })
-      );
+      deleteItem(id);
     }
   };
 
-  //////////////////////////////////////////////////////////////
-  const deleteAllTasks = async () => {
+  const deleteItem = async (id) => {
+    await fetch(`/tasks/${id}`, {
+      method: 'DELETE'
+    });
+    setTasks(
+      tasks.filter((task) => {
+        return task.id !== id;
+      })
+    );
+  };
+
+  const deleteAllTasks = async (tasks) => {
     const confirm = window.confirm('Delete All Tasks?');
     if (confirm) {
-      await fetch(`/tasks`, {
-        method: 'DELETE'
-      });
-      setTasks([]);
+      tasks.map((task) => (
+        deleteItem(task.id)
+      ));
     }
+    fetchTasks();
   };
-  /////////////////////////////////////////////////////////////
-
-  // const findItem = (id) => {
-  //   const item = tasks.find((task) => {
-  //     return task.id === id;
-  //   });
-  //   setEditItem(item);
-  // };
-
 
   const editTask = async (id, editedTask) => {
     const response = await fetch(`/tasks/${id}`, {

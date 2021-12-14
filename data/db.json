@@ -1,36 +1,3 @@
 {
-  "tasks": [
-    {
-      "title": "Painting",
-      "id": 2
-    },
-    {
-      "title": "Shopping",
-      "id": 3
-    },
-    {
-      "title": "Coding",
-      "id": 4
-    },
-    {
-      "title": "Reading",
-      "id": 5
-    },
-    {
-      "title": "Testing",
-      "id": 8
-    },
-    {
-      "title": "Baking",
-      "id": 9
-    },
-    {
-      "title": "Drivingly",
-      "id": 10
-    },
-    {
-      "title": "Buying",
-      "id": 11
-    }
-  ]
+  "tasks": []
 }
