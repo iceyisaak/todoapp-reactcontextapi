@@ -11,7 +11,6 @@ const TaskForm = () => {
   const {
     addTask,
     editTask,
-    // editItem,
     taskToEdit
   } = useTodoContext();
 
@@ -32,7 +31,6 @@ const TaskForm = () => {
       setText('');
     } else {
       editTask(taskToEdit.task.id, newTask);
-      // console.log(text, taskToEdit.task.id);
     }
 
   };

@@ -6,7 +6,6 @@ const TodoContext = createContext();
 const TodoContextProvider = ({ children }) => {
 
   const [tasks, setTasks] = useState([]);
-  // const [editItem, setEditItem] = useState(null);
   const [isLoading, setIsLoading] = useState(false);
   const [taskToEdit, setTaskToEdit] = useState({
     task: {},
@@ -18,7 +17,6 @@ const TodoContextProvider = ({ children }) => {
   }, []);
 
 
-
   const fetchTasks = async () => {
     setIsLoading(true);
     const response = await fetch(`/tasks`);
@@ -26,7 +24,6 @@ const TodoContextProvider = ({ children }) => {
     setTasks(data);
     setIsLoading(false);
   };
-
 
 
   const addTask = async (newTask) => {
@@ -90,7 +87,6 @@ const TodoContextProvider = ({ children }) => {
 
 
   const selectTaskToEdit = (task) => {
-    console.log('TodoContext.js', task);
     setTaskToEdit({
       task,
       edit: true
@@ -107,8 +103,6 @@ const TodoContextProvider = ({ children }) => {
         taskToEdit,
         selectTaskToEdit,
         deleteAllTasks,
-        // findItem,
-        // editItem,
         isLoading
       }}
     >
